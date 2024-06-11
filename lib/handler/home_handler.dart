@@ -2,13 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
-import 'package:server_learning/service/auth_service.dart';
 import 'package:server_learning/service/mysql_service.dart';
 import 'package:shelf/shelf.dart';
 
 FutureOr<Response> homeHandler(Request request) async {
-  // var jwt = request.context['jwt'] as JWT;
-  // print(jwt.payload['name']);
+  var jwt = request.context['jwt'] as JWT;
+  print(jwt.payload['name']);
   try {
     var data = await MysqlService.getData();
 

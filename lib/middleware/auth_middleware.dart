@@ -16,8 +16,8 @@ Middleware authMiddleware() {
           return Response.forbidden('invalid token');
         } else {
           try {
-            AuthService.verifyToken(token);
-            var nReq = request.change(context: {'jwt': token});
+            var jwt = AuthService.verifyToken(token);
+            var nReq = request.change(context: {'jwt': jwt});
             return inHandler(nReq);
           } catch (e) {
             return Response.forbidden('invalid token');
