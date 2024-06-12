@@ -41,6 +41,9 @@ class MysqlService {
         // FIXME 这里应该是存在问题的，必须要两次conn.query才可以执行第一次的sql,可以在上面获取链接的后面加上await
         // result = await conn.query('');
         // 这里返回的是一个对象，需要转成json才可以返回给前端
+        result = await conn.query('select user_id, user_name, nick_name from sys_user where user_id=?', [1]);
+        result = await conn.query('select user_id, user_name, nick_name, dept_name from sys_user as a join sys_dept as b'
+            ' on a.dept_id = b.dept_id where user_id = ?', [1]);
         var data = result.map((e) {
           return User.fromMap(e.fields);
         }).toList();
