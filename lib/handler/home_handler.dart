@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:server_learning/service/mysql_service.dart';
+import 'package:server_learning/service/redis_service.dart';
 import 'package:shelf/shelf.dart';
 
 FutureOr<Response> homeHandler(Request request) async {
@@ -10,10 +11,11 @@ FutureOr<Response> homeHandler(Request request) async {
   print(jwt.payload['name']);
   try {
     var data = await MysqlService.getData();
-
+    var redisData = await RedisAuth.getData('name');
     var response = {
       'status': 0,
       'msg': 'success',
+      'redisData': redisData,
       'data':data.map((e) => e.toMap()).toList(),
     };
     return Response.ok(jsonEncode(response));

@@ -5,3 +5,7 @@ database:
   password: password
   db: ry1
   maxConnections: 10
+redis:
+  host: localhost
+  port: 6379
+  maxConnections: 5
