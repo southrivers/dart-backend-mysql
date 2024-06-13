@@ -8,7 +8,7 @@ Middleware authMiddleware() {
   return (Handler inHandler) {
     return (Request request) {
       var path = request.url.path;
-      if (path.contains('login')) {
+      if (path.contains('login')||path.contains('chat')) {
         return inHandler(request);
       } else {
         var token = request.headers['Authorization'];
